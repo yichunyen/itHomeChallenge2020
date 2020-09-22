@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/default_padding">
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/TitleTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Sky Walker" />
+
+    <TextView
+        android:id="@+id/tvHeight"
+        style="@style/BodyTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/default_padding"
+        tools:text="@string/profile_height" />
+
+    <TextView
+        android:id="@+id/tvWeight"
+        style="@style/BodyTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        tools:text="@string/profile_weight" />
+
+    <TextView
+        android:id="@+id/tvGender"
+        style="@style/BodyTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        tools:text="@string/profile_gender" />
+
+    <TextView
+        android:id="@+id/tvBirthYear"
+        style="@style/BodyTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        tools:text="@string/profile_birth_year" />
+
+</LinearLayout>

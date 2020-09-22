@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">itHomeChallenge</string>
+    <!-- Profile -->
+    <string name="profile_height">Height(cm): %s</string>
+    <string name="profile_weight">Height(kg): %s</string>
+    <string name="profile_gender">Gender: %s</string>
+    <string name="profile_birth_year">Born in %s</string>
 </resources>
