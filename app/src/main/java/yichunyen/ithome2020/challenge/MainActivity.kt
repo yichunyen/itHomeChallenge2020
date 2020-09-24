@@ -1,8 +1,10 @@
 package yichunyen.ithome2020.challenge
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
+        setupStatusBarBackground()
         MainPresenter(this)
         presenter?.fetchData()
     }
@@ -23,6 +26,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         toolbar.setTitleTextColor(Color.BLACK)
         toolbar.setBackgroundResource(R.color.colorPrimary)
         setSupportActionBar(toolbar)
+    }
+
+    private fun setupStatusBarBackground() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            window.statusBarColor = Color.BLACK
+        }
     }
 
     override fun onStop() {
