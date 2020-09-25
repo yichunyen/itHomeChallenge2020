@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showProfileList(list: List<Profile>) {
         val adapter = ProfileListAdapter(list)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(DiverItemDecoration())
         recyclerView.adapter = adapter
     }
 
