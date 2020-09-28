@@ -8,16 +8,21 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import yichunyen.ithome2020.challenge.data.Film
 import yichunyen.ithome2020.challenge.data.Profile
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     private var presenter: MainContract.Presenter? = null
+    private var isFetchedProfileData = false
+    private var isFetchedFilmList = false
+    private var filmList = listOf<Film>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
         setupStatusBarBackground()
         MainPresenter(this)
+        progressBar.visibility = View.VISIBLE
         presenter?.fetchData()
     }
 
@@ -40,17 +45,34 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showProfileList(list: List<Profile>) {
+        isFetchedProfileData = true
         val adapter = ProfileListAdapter(list)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DiverItemDecoration())
         recyclerView.adapter = adapter
+        checkLoadingProgressBar()
     }
 
     override fun showApiError(errorMessage: String) {
+        isFetchedProfileData = true
         Log.e("MainActivity", errorMessage)
+        checkLoadingProgressBar()
+    }
+
+    override fun showFilmList(list: List<Film>) {
+        list.forEach { Log.i("filmTitle", it.title) }
+        filmList = list
+        isFetchedFilmList = true
+        checkLoadingProgressBar()
     }
 
     override fun setPresenter(presenter: MainContract.Presenter) {
         this.presenter = presenter
+    }
+
+    private fun checkLoadingProgressBar() {
+        if (isFetchedProfileData && isFetchedFilmList) {
+            progressBar.visibility = View.GONE
+        }
     }
 }
