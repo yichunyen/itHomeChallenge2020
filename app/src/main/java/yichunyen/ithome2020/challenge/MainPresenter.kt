@@ -15,7 +15,7 @@ class MainPresenter(
         view.setPresenter(this)
     }
 
-    private val endPointOfProfileList = NetworkManager.client.profileList()
+    private val profileListCall = NetworkManager.client.profileList()
     private val filmCall = NetworkManager.client.films()
 
     override fun fetchData() {
@@ -24,7 +24,7 @@ class MainPresenter(
     }
 
     private fun getProfileList(){
-        endPointOfProfileList.enqueue(object : NetworkCallback<ProfileList>() {
+        profileListCall.enqueue(object : NetworkCallback<ProfileList>() {
             override fun onSuccess(response: ProfileList) {
                 view.showProfileList(response.results)
             }
@@ -57,6 +57,7 @@ class MainPresenter(
     }
 
     override fun cancelAPIRequest() {
-        endPointOfProfileList.cancel()
+        profileListCall.cancel()
+        filmCall.cancel()
     }
 }
