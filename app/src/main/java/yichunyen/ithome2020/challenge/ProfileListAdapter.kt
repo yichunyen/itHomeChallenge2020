@@ -12,7 +12,10 @@ import java.util.*
 /**
  * Display the profile information adapter.
  */
-class ProfileListAdapter(private val list: List<Profile>) :
+class ProfileListAdapter(
+    private val list: List<Profile>,
+    private val listener: OnClickItemListener
+) :
     RecyclerView.Adapter<ProfileListAdapter.ProfileViewHolder>() {
     private val backgroundColorList =
         listOf(
@@ -21,6 +24,10 @@ class ProfileListAdapter(private val list: List<Profile>) :
             R.color.profileBackgroundGreen,
             R.color.profileBackgroundYellow
         )
+
+    interface OnClickItemListener {
+        fun onClick(index: Int, profile: Profile)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         val view = from(parent.context).inflate(R.layout.view_profile, parent, false)
@@ -43,6 +50,10 @@ class ProfileListAdapter(private val list: List<Profile>) :
         private val tvGender = itemView.tvGender
         private val tvBirthYear = itemView.tvBirthYear
 
+        init {
+
+        }
+
         fun setupData(profile: Profile, backgroundRes: Int) {
             cardView.setCardBackgroundColor(getResourceColorId(backgroundRes))
             tvName.text = profile.name
@@ -62,6 +73,13 @@ class ProfileListAdapter(private val list: List<Profile>) :
                 getResourceStringId(R.string.profile_birth_year),
                 profile.birthYear
             )
+
+            itemView.setOnClickListener {
+                val index = adapterPosition
+                if (index != RecyclerView.NO_POSITION) {
+                    listener.onClick(index, profile)
+                }
+            }
         }
 
         private fun getResourceStringId(resId: Int): String {

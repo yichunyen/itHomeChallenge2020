@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -46,7 +47,32 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showProfileList(list: List<Profile>) {
         isFetchedProfileData = true
-        val adapter = ProfileListAdapter(list)
+        val adapter = ProfileListAdapter(list, object : ProfileListAdapter.OnClickItemListener {
+            override fun onClick(index: Int, profile: Profile) {
+                val filmIds = profile.filmIds
+                val builder = StringBuilder()
+                builder.append("Films below: ")
+                if (filmIds.isEmpty()) {
+                    builder.append("No film list.")
+                } else {
+                    builder.append("\n")
+                    // id starts from 1
+                    filmIds.forEach {
+                        try {
+                            val index = it.toInt() - 1
+                            if (index == -1 || index > filmList.size) {
+                                return
+                            }
+                            builder.append("- ${filmList[index].title}\n")
+                        } catch (exception: Exception) {
+                            Log.e(TAG, exception.message ?: "")
+                        }
+                    }
+                }
+
+                showFilmsPopup(builder.toString())
+            }
+        })
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DiverItemDecoration())
         recyclerView.adapter = adapter
@@ -55,12 +81,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showApiError(errorMessage: String) {
         isFetchedProfileData = true
-        Log.e("MainActivity", errorMessage)
+        Log.e(TAG, errorMessage)
         checkLoadingProgressBar()
     }
 
     override fun showFilmList(list: List<Film>) {
-        list.forEach { Log.i("filmTitle", it.title) }
         filmList = list
         isFetchedFilmList = true
         checkLoadingProgressBar()
@@ -74,5 +99,20 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         if (isFetchedProfileData && isFetchedFilmList) {
             progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showFilmsPopup(films: String) {
+        val dialog: AlertDialog = AlertDialog.Builder(this)
+            .setMessage(films)
+            .create()
+        if (isFinishing) {
+            return
+        } else {
+            dialog.show()
+        }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
