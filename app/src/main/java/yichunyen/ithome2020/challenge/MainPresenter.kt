@@ -2,6 +2,7 @@ package yichunyen.ithome2020.challenge
 
 import okhttp3.ResponseBody
 import retrofit2.Call
+import yichunyen.ithome2020.challenge.data.FilmResponse
 import yichunyen.ithome2020.challenge.data.ProfileList
 import yichunyen.ithome2020.challenge.network.NetworkCallback
 import yichunyen.ithome2020.challenge.network.NetworkManager
@@ -14,10 +15,16 @@ class MainPresenter(
         view.setPresenter(this)
     }
 
-    private val endPointOfProfileList = NetworkManager.client.profileList()
+    private val profileListCall = NetworkManager.client.profileList()
+    private val filmCall = NetworkManager.client.films()
 
     override fun fetchData() {
-        endPointOfProfileList.enqueue(object : NetworkCallback<ProfileList>() {
+        getProfileList()
+        getFilms()
+    }
+
+    private fun getProfileList(){
+        profileListCall.enqueue(object : NetworkCallback<ProfileList>() {
             override fun onSuccess(response: ProfileList) {
                 view.showProfileList(response.results)
             }
@@ -32,7 +39,25 @@ class MainPresenter(
         })
     }
 
+    private fun getFilms(){
+        filmCall.enqueue(object : NetworkCallback<FilmResponse>(){
+            override fun onSuccess(response: FilmResponse) {
+                view.showFilmList(response.results)
+            }
+
+            override fun onFailure(
+                call: Call<FilmResponse>,
+                statusCode: Int,
+                errorBody: ResponseBody?
+            ) {
+                view.showFilmList(listOf())
+            }
+
+        })
+    }
+
     override fun cancelAPIRequest() {
-        endPointOfProfileList.cancel()
+        profileListCall.cancel()
+        filmCall.cancel()
     }
 }

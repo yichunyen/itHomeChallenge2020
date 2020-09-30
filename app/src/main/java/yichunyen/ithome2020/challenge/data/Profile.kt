@@ -1,7 +1,8 @@
 package yichunyen.ithome2020.challenge.data
 
 import com.google.gson.annotations.SerializedName
-import yichunyen.ithome2020.challenge.data.Gender.*
+import yichunyen.ithome2020.challenge.data.Gender.UNKNOWN
+import yichunyen.ithome2020.challenge.data.Gender.values
 
 /**
  * {
@@ -43,7 +44,8 @@ data class Profile(
     val height: String,
     @SerializedName("mass") val weight: String,
     private val gender: String,
-    @SerializedName("birth_year") val birthYear: String
+    @SerializedName("birth_year") val birthYear: String,
+    private val films: List<String>
 ) {
     val genderType: Gender
         get() {
@@ -53,5 +55,19 @@ data class Profile(
                 }
             }
             return UNKNOWN
+        }
+
+    val filmIds: ArrayList<String>
+        get() {
+            val list = arrayListOf<String>()
+            films.forEach {
+                url->
+                list.add(
+                    url.filter {
+                        it.isDigit()
+                    }
+                )
+            }
+            return list
         }
 }

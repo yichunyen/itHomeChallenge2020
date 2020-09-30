@@ -12,64 +12,104 @@ class ProfileListTest : BaseTest() {
         list.results.forEach {
             when (it.name) {
                 "Luke Skywalker" -> {
-                    Assert.assertEquals("172", it.height)
-                    Assert.assertEquals("77", it.weight)
-                    Assert.assertEquals(Gender.MALE, it.genderType)
-                    Assert.assertEquals("19BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "172",
+                        "77",
+                        Gender.MALE,
+                        "19BBY",
+                        arrayListOf("1", "2", "3", "6")
+                    )
                 }
                 "C-3PO" -> {
-                    Assert.assertEquals("167", it.height)
-                    Assert.assertEquals("75", it.weight)
-                    Assert.assertEquals(Gender.NONE, it.genderType)
-                    Assert.assertEquals("112BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "167",
+                        "75",
+                        Gender.NONE,
+                        "112BBY",
+                        arrayListOf("1", "2", "3", "4", "5", "6")
+                    )
                 }
                 "R2-D2" -> {
-                    Assert.assertEquals("96", it.height)
-                    Assert.assertEquals("32", it.weight)
-                    Assert.assertEquals(Gender.NONE, it.genderType)
-                    Assert.assertEquals("33BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "96",
+                        "32",
+                        Gender.NONE,
+                        "33BBY",
+                        arrayListOf("1", "2", "3", "4", "5", "6")
+                    )
                 }
                 "Darth Vader" -> {
-                    Assert.assertEquals("202", it.height)
-                    Assert.assertEquals("136", it.weight)
-                    Assert.assertEquals(Gender.MALE, it.genderType)
-                    Assert.assertEquals("41.9BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "202",
+                        "136",
+                        Gender.MALE,
+                        "41.9BBY",
+                        arrayListOf("1", "2", "3", "6")
+                    )
                 }
                 "Leia Organa" -> {
-                    Assert.assertEquals("150", it.height)
-                    Assert.assertEquals("49", it.weight)
-                    Assert.assertEquals(Gender.FEMALE, it.genderType)
-                    Assert.assertEquals("19BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "150",
+                        "49",
+                        Gender.FEMALE,
+                        "19BBY",
+                        arrayListOf("1", "2", "3", "6")
+                    )
                 }
                 "Owen Lars" -> {
-                    Assert.assertEquals("178", it.height)
-                    Assert.assertEquals("120", it.weight)
-                    Assert.assertEquals(Gender.MALE, it.genderType)
-                    Assert.assertEquals("52BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "178",
+                        "120",
+                        Gender.MALE,
+                        "52BBY",
+                        arrayListOf("1", "5", "6")
+                    )
                 }
                 "Beru Whitesun lars" -> {
-                    Assert.assertEquals("165", it.height)
-                    Assert.assertEquals("75", it.weight)
-                    Assert.assertEquals(Gender.FEMALE, it.genderType)
-                    Assert.assertEquals("47BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "165",
+                        "75",
+                        Gender.FEMALE,
+                        "47BBY",
+                        arrayListOf("1", "5", "6")
+                    )
                 }
                 "R5-D4" -> {
-                    Assert.assertEquals("97", it.height)
-                    Assert.assertEquals("32", it.weight)
-                    Assert.assertEquals(Gender.NONE, it.genderType)
-                    Assert.assertEquals("unknown", it.birthYear)
+                    checkProfile(
+                        it,
+                        "97",
+                        "32",
+                        Gender.NONE,
+                        "unknown",
+                        arrayListOf("1")
+                    )
                 }
                 "Biggs Darklighter" -> {
-                    Assert.assertEquals("183", it.height)
-                    Assert.assertEquals("84", it.weight)
-                    Assert.assertEquals(Gender.MALE, it.genderType)
-                    Assert.assertEquals("24BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "183",
+                        "84",
+                        Gender.MALE,
+                        "24BBY",
+                        arrayListOf("1")
+                    )
                 }
                 "Obi-Wan Kenobi" -> {
-                    Assert.assertEquals("182", it.height)
-                    Assert.assertEquals("77", it.weight)
-                    Assert.assertEquals(Gender.MALE, it.genderType)
-                    Assert.assertEquals("57BBY", it.birthYear)
+                    checkProfile(
+                        it,
+                        "182",
+                        "77",
+                        Gender.MALE,
+                        "57BBY",
+                        arrayListOf("1", "2", "3", "4", "5", "6")
+                    )
                 }
                 else -> {
                     AssertionError("Need to check the profileList.json, here is extra data in list.")
@@ -86,5 +126,23 @@ class ProfileListTest : BaseTest() {
             jsonRawData,
             ProfileList::class.java
         )
+    }
+
+    private fun checkProfile(
+        profile: Profile,
+        height: String,
+        weight: String,
+        gender: Gender,
+        birthYear: String,
+        expectedFilmsIds: ArrayList<String>
+    ) {
+        Assert.assertEquals(height, profile.height)
+        Assert.assertEquals(weight, profile.weight)
+        Assert.assertEquals(gender, profile.genderType)
+        Assert.assertEquals(birthYear, profile.birthYear)
+        val filmIds = profile.filmIds
+        for (index in 0 until filmIds.size - 1) {
+            Assert.assertEquals(expectedFilmsIds[index], filmIds[index])
+        }
     }
 }
