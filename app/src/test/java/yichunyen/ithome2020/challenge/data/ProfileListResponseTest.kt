@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import org.junit.Assert
 import org.junit.Test
 
-class ProfileListTest : BaseTest() {
+class ProfileListResponseTest : BaseTest() {
 
     @Test
     fun listTest(){
@@ -119,12 +119,12 @@ class ProfileListTest : BaseTest() {
         }
     }
 
-    private fun getList(): ProfileList {
+    private fun getList(): ProfileListResponse {
         val jsonRawData = readJsonFile("profileList")
 
         return Gson().fromJson(
             jsonRawData,
-            ProfileList::class.java
+            ProfileListResponse::class.java
         )
     }
 

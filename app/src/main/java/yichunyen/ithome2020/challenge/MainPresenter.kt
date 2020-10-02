@@ -3,7 +3,7 @@ package yichunyen.ithome2020.challenge
 import okhttp3.ResponseBody
 import retrofit2.Call
 import yichunyen.ithome2020.challenge.data.FilmResponse
-import yichunyen.ithome2020.challenge.data.ProfileList
+import yichunyen.ithome2020.challenge.data.ProfileListResponse
 import yichunyen.ithome2020.challenge.network.NetworkCallback
 import yichunyen.ithome2020.challenge.network.NetworkManager
 
@@ -24,13 +24,13 @@ class MainPresenter(
     }
 
     private fun getProfileList(){
-        profileListCall.enqueue(object : NetworkCallback<ProfileList>() {
-            override fun onSuccess(response: ProfileList) {
+        profileListCall.enqueue(object : NetworkCallback<ProfileListResponse>() {
+            override fun onSuccess(response: ProfileListResponse) {
                 view.showProfileList(response.results)
             }
 
             override fun onFailure(
-                call: Call<ProfileList>,
+                call: Call<ProfileListResponse>,
                 statusCode: Int,
                 errorBody: ResponseBody?
             ) {
