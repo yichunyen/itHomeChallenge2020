@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private var presenter: MainContract.Presenter? = null
     private var isFetchedProfileData = false
     private var isFetchedFilmList = false
-    private var filmList = listOf<Film>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,28 +48,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         isFetchedProfileData = true
         val adapter = ProfileListAdapter(list, object : ProfileListAdapter.OnClickItemListener {
             override fun onClick(index: Int, profile: Profile) {
-                val filmIds = profile.filmIds
-                val builder = StringBuilder()
-                builder.append("Films below: ")
-                if (filmIds.isEmpty()) {
-                    builder.append("No film list.")
-                } else {
-                    builder.append("\n")
-                    // id starts from 1
-                    filmIds.forEach {
-                        try {
-                            val index = it.toInt() - 1
-                            if (index == -1 || index > filmList.size) {
-                                return
-                            }
-                            builder.append("- ${filmList[index].title}\n")
-                        } catch (exception: Exception) {
-                            Log.e(TAG, exception.message ?: "")
-                        }
-                    }
+                presenter?.let {
+                    showFilmsPopup(
+                        it.getFilmDisplayString(profile.filmIds)
+                    )
                 }
-
-                showFilmsPopup(builder.toString())
             }
         })
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -86,7 +68,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showFilmList(list: List<Film>) {
-        filmList = list
         isFetchedFilmList = true
         checkLoadingProgressBar()
     }
