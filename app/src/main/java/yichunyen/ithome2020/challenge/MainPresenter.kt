@@ -48,7 +48,7 @@ class MainPresenter(
         filmCall.enqueue(object : NetworkCallback<FilmResponse>(){
             override fun onSuccess(response: FilmResponse) {
                 filmList = response.results
-                view.showFilmList(filmList)
+                view.fetchedFilmListDone()
             }
 
             override fun onFailure(
@@ -56,7 +56,7 @@ class MainPresenter(
                 statusCode: Int,
                 errorBody: ResponseBody?
             ) {
-                view.showFilmList(listOf())
+                view.fetchedFilmListDone()
             }
 
         })

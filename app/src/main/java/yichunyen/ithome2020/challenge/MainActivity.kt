@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import yichunyen.ithome2020.challenge.data.Film
 import yichunyen.ithome2020.challenge.data.Profile
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         checkLoadingProgressBar()
     }
 
-    override fun showFilmList(list: List<Film>) {
+    override fun fetchedFilmListDone() {
         isFetchedFilmList = true
         checkLoadingProgressBar()
     }
