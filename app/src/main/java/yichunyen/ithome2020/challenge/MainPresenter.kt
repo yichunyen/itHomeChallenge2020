@@ -70,24 +70,24 @@ class MainPresenter(
     override fun getFilmDisplayString(ids: ArrayList<String>): String {
         val builder = StringBuilder()
         builder.append("Films below: ")
-        if (ids.isEmpty()) {
+        if (ids.isEmpty() || filmList.isEmpty()) {
             return builder.append(emptyFilmString).toString()
-        } else {
-            builder.append("\n")
-            // id starts from 1
-            ids.forEach {
-                try {
-                    val index = it.toInt() - 1
-                    if (index == -1 || index > filmList.size) {
-                        builder.append(emptyFilmString)
-                        return@forEach
-                    }
-                    builder.append("- ${filmList[index].title}\n")
-                } catch (exception: Exception) {
+        }
+
+        builder.append("\n")
+        // id starts from 1
+        ids.forEach {
+            try {
+                val index = it.toInt() - 1
+                if (index == -1 || index > filmList.size) {
+                    builder.append(emptyFilmString)
+                    return@forEach
+                }
+                builder.append("- ${filmList[index].title}\n")
+            } catch (exception: Exception) {
                     Log.e(TAG, exception.message ?: "")
                 }
             }
-            return builder.toString()
-        }
+        return builder.toString()
     }
 }
