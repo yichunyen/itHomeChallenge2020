@@ -14,5 +14,6 @@ interface MainContract {
     interface Presenter {
         fun fetchData()
         fun cancelAPIRequest()
+        fun getFilmDisplayString(ids: ArrayList<String>) : String
     }
 }
