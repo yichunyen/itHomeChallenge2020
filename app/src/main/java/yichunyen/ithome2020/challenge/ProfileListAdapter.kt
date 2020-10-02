@@ -50,10 +50,6 @@ class ProfileListAdapter(
         private val tvGender = itemView.tvGender
         private val tvBirthYear = itemView.tvBirthYear
 
-        init {
-
-        }
-
         fun setupData(profile: Profile, backgroundRes: Int) {
             cardView.setCardBackgroundColor(getResourceColorId(backgroundRes))
             tvName.text = profile.name
