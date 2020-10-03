@@ -3,6 +3,7 @@
     <color name="colorPrimary">#F5F5F5</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="ic_30days_launcher_background">@android:color/white</color>
 
     <!-- Profile background color -->
     <color name="profileBackgroundWhite">@android:color/white</color>
