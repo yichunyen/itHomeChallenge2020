@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">itHomeChallenge</string>
+    <string name="app_name">Profiles Demo</string>
     <!-- Profile -->
     <string name="profile_height">Height(cm): %s</string>
     <string name="profile_weight">Weight(kg): %s</string>

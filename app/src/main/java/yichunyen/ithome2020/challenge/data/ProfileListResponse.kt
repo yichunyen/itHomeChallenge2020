@@ -38,7 +38,7 @@ package yichunyen.ithome2020.challenge.data
  *      ]
  *  }
  */
-data class ProfileList (
+data class ProfileListResponse (
     val count: String,
     val next: String?,
     val previous: String?,
