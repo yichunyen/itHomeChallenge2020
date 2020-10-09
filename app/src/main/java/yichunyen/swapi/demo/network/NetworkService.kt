@@ -1,9 +1,9 @@
-package yichunyen.ithome2020.challenge.network
+package yichunyen.swapi.demo.network
 
 import retrofit2.Call
 import retrofit2.http.GET
-import yichunyen.ithome2020.challenge.data.FilmResponse
-import yichunyen.ithome2020.challenge.data.ProfileListResponse
+import yichunyen.swapi.demo.data.FilmResponse
+import yichunyen.swapi.demo.data.ProfileListResponse
 
 interface NetworkService {
     @GET("/api/people/")

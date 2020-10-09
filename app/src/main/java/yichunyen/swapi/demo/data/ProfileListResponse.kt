@@ -1,4 +1,5 @@
-package yichunyen.ithome2020.challenge.data
+package yichunyen.swapi.demo.data
+
 
 /**
  * {
