@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge
+package yichunyen.swapi.demo
 
 import android.graphics.Color
 import android.os.Build
@@ -9,9 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import yichunyen.ithome2020.challenge.data.Profile
+import yichunyen.swapi.demo.data.Profile
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(),
+    MainContract.View {
     private var presenter: MainContract.Presenter? = null
     private var isFetchedProfileData = false
     private var isFetchedFilmList = false
@@ -45,15 +46,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showProfileList(list: List<Profile>) {
         isFetchedProfileData = true
-        val adapter = ProfileListAdapter(list, object : ProfileListAdapter.OnClickItemListener {
-            override fun onClick(index: Int, profile: Profile) {
-                presenter?.let {
-                    showFilmsPopup(
-                        it.getFilmDisplayString(profile.filmIds)
-                    )
+        val adapter = ProfileListAdapter(
+            list,
+            object :
+                ProfileListAdapter.OnClickItemListener {
+                override fun onClick(
+                    index: Int,
+                    profile: Profile
+                ) {
+                    presenter?.let {
+                        showFilmsPopup(
+                            it.getFilmDisplayString(profile.filmIds)
+                        )
+                    }
                 }
-            }
-        })
+            })
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DiverItemDecoration())
         recyclerView.adapter = adapter

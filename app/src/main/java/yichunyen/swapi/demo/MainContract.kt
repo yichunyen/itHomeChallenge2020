@@ -1,11 +1,11 @@
-package yichunyen.ithome2020.challenge
+package yichunyen.swapi.demo
 
-import yichunyen.ithome2020.challenge.base.BaseView
-import yichunyen.ithome2020.challenge.data.Film
-import yichunyen.ithome2020.challenge.data.Profile
+import yichunyen.swapi.demo.base.BaseView
+import yichunyen.swapi.demo.data.Profile
 
 interface MainContract {
-    interface View : BaseView<Presenter> {
+    interface View :
+        BaseView<Presenter> {
         fun showProfileList(list: List<Profile>)
         fun showApiError(errorMessage: String)
         fun fetchedFilmListDone()

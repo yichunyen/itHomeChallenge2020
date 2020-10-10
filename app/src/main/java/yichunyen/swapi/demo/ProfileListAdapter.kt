@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge
+package yichunyen.swapi.demo
 
 import android.view.LayoutInflater.from
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_profile.view.*
-import yichunyen.ithome2020.challenge.data.Profile
+import yichunyen.swapi.demo.data.Profile
 import java.util.*
 
 /**

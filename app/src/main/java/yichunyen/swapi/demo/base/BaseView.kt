@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge.base
+package yichunyen.swapi.demo.base
 
 interface BaseView<T> {
     fun setPresenter(presenter: T)
