@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge.network
+package yichunyen.swapi.demo.network
 
 import okhttp3.ResponseBody
 import retrofit2.Call

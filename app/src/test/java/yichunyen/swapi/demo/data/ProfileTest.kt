@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge.data
+package yichunyen.swapi.demo.data
 
 import com.google.gson.Gson
 import org.junit.Assert

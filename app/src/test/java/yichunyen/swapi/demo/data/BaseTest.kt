@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge.data
+package yichunyen.swapi.demo.data
 
 import java.io.BufferedReader
 import java.io.FileInputStream
@@ -14,7 +14,7 @@ open class BaseTest {
 
         val bufferedReader = BufferedReader(
             InputStreamReader(
-                FileInputStream("${ASSET_BASE_PATH}$jsonFileName.json")
+                FileInputStream("$ASSET_BASE_PATH$jsonFileName.json")
             )
         )
         val stringBuilder = StringBuilder()

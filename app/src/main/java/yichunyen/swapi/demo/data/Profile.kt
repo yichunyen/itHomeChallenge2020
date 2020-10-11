@@ -1,8 +1,8 @@
-package yichunyen.ithome2020.challenge.data
+package yichunyen.swapi.demo.data
 
 import com.google.gson.annotations.SerializedName
-import yichunyen.ithome2020.challenge.data.Gender.UNKNOWN
-import yichunyen.ithome2020.challenge.data.Gender.values
+import yichunyen.swapi.demo.data.Gender.UNKNOWN
+import yichunyen.swapi.demo.data.Gender.values
 
 /**
  * {

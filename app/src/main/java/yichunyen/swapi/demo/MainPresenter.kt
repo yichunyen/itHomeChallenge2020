@@ -1,13 +1,13 @@
-package yichunyen.ithome2020.challenge
+package yichunyen.swapi.demo
 
 import android.util.Log
 import okhttp3.ResponseBody
 import retrofit2.Call
-import yichunyen.ithome2020.challenge.data.Film
-import yichunyen.ithome2020.challenge.data.FilmResponse
-import yichunyen.ithome2020.challenge.data.ProfileListResponse
-import yichunyen.ithome2020.challenge.network.NetworkCallback
-import yichunyen.ithome2020.challenge.network.NetworkManager
+import yichunyen.swapi.demo.data.Film
+import yichunyen.swapi.demo.data.FilmResponse
+import yichunyen.swapi.demo.data.ProfileListResponse
+import yichunyen.swapi.demo.network.NetworkCallback
+import yichunyen.swapi.demo.network.NetworkManager
 
 private const val TAG = "MainPresenter"
 class MainPresenter(

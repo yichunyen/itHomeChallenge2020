@@ -1,4 +1,4 @@
-package yichunyen.ithome2020.challenge
+package yichunyen.swapi.demo
 
 import android.graphics.Rect
 import android.view.View
