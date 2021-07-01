@@ -11,7 +11,7 @@ android {
         applicationId "yichunyen.swapi.demo"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 15
+        versionCode 16
         versionName "0.1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
