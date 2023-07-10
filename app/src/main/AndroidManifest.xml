@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Testing Android target SDK upgrade to 30, what if needs the permission -->
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

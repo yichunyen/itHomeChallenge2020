@@ -4,15 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.0"
 
     defaultConfig {
         applicationId "yichunyen.swapi.demo"
         minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 19
-        versionName "0.1.9"
+        targetSdkVersion target_sdk_version
+        versionCode 22
+        versionName "0.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
