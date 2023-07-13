@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,19 @@ class MainActivity : AppCompatActivity(),
         MainPresenter(this)
         progressBar.visibility = View.VISIBLE
         presenter?.fetchData()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menuMore -> {
+                startActivity(WebViewActivity.newIntent(this))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     private fun initToolbar() {
