@@ -5,49 +5,38 @@ import org.junit.Assert
 import org.junit.Test
 
 
-class ProfileTest {
+class ProfileTest : BaseTest() {
+    @Test
+    fun genderFemaleTest() {
+        val profile = getProfile("profile_female")
+        Assert.assertEquals(Gender.FEMALE, profile.genderType)
+    }
 
     @Test
-    fun skyWalkerTest(){
-        val input = "\n" +
-                "{\n" +
-                "  \"name\": \"Luke Skywalker\",\n" +
-                "  \"height\": \"172\",\n" +
-                "  \"mass\": \"77\",\n" +
-                "  \"hair_color\": \"blond\",\n" +
-                "  \"skin_color\": \"fair\",\n" +
-                "  \"eye_color\": \"blue\",\n" +
-                "  \"birth_year\": \"19BBY\",\n" +
-                "  \"gender\": \"male\",\n" +
-                "  \"homeworld\": \"https://swapi.dev/api/planets/1/\",\n" +
-                "  \"films\": [\n" +
-                "    \"https://swapi.dev/api/films/2/\",\n" +
-                "    \"https://swapi.dev/api/films/6/\",\n" +
-                "    \"https://swapi.dev/api/films/3/\",\n" +
-                "    \"https://swapi.dev/api/films/1/\",\n" +
-                "    \"https://swapi.dev/api/films/7/\"\n" +
-                "  ],\n" +
-                "  \"species\": [\n" +
-                "    \"https://swapi.dev/api/species/1/\"\n" +
-                "  ],\n" +
-                "  \"vehicles\": [\n" +
-                "    \"https://swapi.dev/api/vehicles/14/\",\n" +
-                "    \"https://swapi.dev/api/vehicles/30/\"\n" +
-                "  ],\n" +
-                "  \"starships\": [\n" +
-                "    \"https://swapi.dev/api/starships/12/\",\n" +
-                "    \"https://swapi.dev/api/starships/22/\"\n" +
-                "  ],\n" +
-                "  \"created\": \"2014-12-09T13:50:51.644000Z\",\n" +
-                "  \"edited\": \"2014-12-20T21:17:56.891000Z\",\n" +
-                "  \"url\": \"https://swapi.dev/api/people/1/\"\n" +
-                "}"
-        val profile = Gson().fromJson(input, Profile::class.java)
-        // determine the data
-        Assert.assertEquals("Luke Skywalker", profile.name)
-        Assert.assertEquals("172", profile.height)
-        Assert.assertEquals("77", profile.weight)
-        Assert.assertEquals("19BBY", profile.birthYear)
+    fun genderMaleTest() {
+        val profile = getProfile("profile_male")
         Assert.assertEquals(Gender.MALE, profile.genderType)
+    }
+
+    @Test
+    fun genderNoneTest() {
+        val profile = getProfile("profile_none")
+        Assert.assertEquals(Gender.NONE, profile.genderType)
+    }
+
+    @Test
+    fun filmIdsTest() {
+        val filmIds = getProfile("profile_filmIds").filmIds
+        Assert.assertEquals("1", filmIds[0])
+        Assert.assertEquals("2", filmIds[1])
+        Assert.assertEquals("3", filmIds[2])
+        Assert.assertEquals("6", filmIds[3])
+    }
+
+    private fun getProfile(fileName: String): Profile {
+        return Gson().fromJson(
+            readJsonFile(fileName),
+            Profile::class.java
+        )
     }
 }

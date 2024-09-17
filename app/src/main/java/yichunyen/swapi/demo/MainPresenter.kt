@@ -15,12 +15,11 @@ class MainPresenter(
 ) : MainContract.Presenter {
     private var filmList: List<Film> = listOf()
     private val emptyFilmString = "No film list."
-
     init {
         view.setPresenter(this)
     }
 
-    private val profileListCall = NetworkManager.client.profileList()
+    private var profileListCall = NetworkManager.client.profileList()
     private val filmCall = NetworkManager.client.films()
 
     override fun fetchData() {
@@ -29,6 +28,7 @@ class MainPresenter(
     }
 
     private fun getProfileList(){
+        profileListCall = NetworkManager.client.profileList(1)
         profileListCall.enqueue(object : NetworkCallback<ProfileListResponse>() {
             override fun onSuccess(response: ProfileListResponse) {
                 view.showProfileList(response.results)

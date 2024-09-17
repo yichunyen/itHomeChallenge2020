@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "690290881205",
+    "project_id": "swdemo-22947",
+    "storage_bucket": "swdemo-22947.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690290881205:android:c560036a9b8263972b04fc",
+        "android_client_info": {
+          "package_name": "yichunyen.swapi.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690290881205-psvmro7ts0f2n4ppd2gl5diah20r31ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAEbIT-41tqbLmaMveQND_IVQwiOduH8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690290881205-psvmro7ts0f2n4ppd2gl5diah20r31ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

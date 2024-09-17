@@ -4,19 +4,26 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import yichunyen.swapi.demo.data.Profile
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity(),
     MainContract.View {
     private var presenter: MainContract.Presenter? = null
     private var isFetchedProfileData = false
     private var isFetchedFilmList = false
+    private var layoutManager: LinearLayoutManager? = null
+    private var isLastPage = false
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
@@ -24,6 +31,19 @@ class MainActivity : AppCompatActivity(),
         MainPresenter(this)
         progressBar.visibility = View.VISIBLE
         presenter?.fetchData()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menuMore -> {
+                startActivity(WebViewActivity.newIntent(this))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     private fun initToolbar() {
@@ -61,8 +81,16 @@ class MainActivity : AppCompatActivity(),
                     }
                 }
             })
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(DiverItemDecoration())
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    shouldLoadMore()
+                }
+            }
+        })
         recyclerView.adapter = adapter
         checkLoadingProgressBar()
     }
@@ -96,6 +124,22 @@ class MainActivity : AppCompatActivity(),
             return
         } else {
             dialog.show()
+        }
+    }
+
+    private fun shouldLoadMore() {
+        layoutManager?.let {
+            if (it.findFirstCompletelyVisibleItemPosition() == RecyclerView.NO_POSITION) {
+                return
+            }
+            val lastPosition = it.findLastCompletelyVisibleItemPosition()
+
+            val result = abs(it.itemCount - lastPosition)
+            // Determine if it is the last item
+            isLastPage = (it.itemCount - 1) == lastPosition
+            if (!isLastPage && abs(result) <= 8) {
+                Log.i(TAG, "loadmore")
+            }
         }
     }
 
