@@ -1,5 +1,7 @@
 package yichunyen.swapi.demo.data
 
+import com.google.gson.annotations.SerializedName
+
 
 /**
  * {
@@ -40,6 +42,7 @@ package yichunyen.swapi.demo.data
  *  }
  */
 data class ProfileListResponse (
+    @SerializedName("total_records")
     val count: String,
     val next: String?,
     val previous: String?,
