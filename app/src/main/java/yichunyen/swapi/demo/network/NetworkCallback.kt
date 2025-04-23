@@ -1,9 +1,12 @@
 package yichunyen.swapi.demo.network
 
+import android.util.Log
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import yichunyen.swapi.demo.BuildConfig
+import java.util.logging.Logger
 
 abstract class NetworkCallback<T> : Callback<T> {
     abstract fun onSuccess(response: T)
@@ -11,6 +14,11 @@ abstract class NetworkCallback<T> : Callback<T> {
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         val responseBody = response.body()
+
+        if (BuildConfig.DEBUG) {
+            Log.d("NetworkCallback", responseBody.toString())
+        }
+
         if (response.isSuccessful) {
             if (responseBody == null) {
                 onFailure(call, response.code(), responseBody)
