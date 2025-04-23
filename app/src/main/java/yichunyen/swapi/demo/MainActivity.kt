@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity(),
     MainContract.View {
     private var presenter: MainContract.Presenter? = null
     private var isFetchedProfileData = false
-    private var isFetchedFilmList = false
     private var layoutManager: LinearLayoutManager? = null
     private var isLastPage = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +33,14 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.menuMore -> {
                 startActivity(WebViewActivity.newIntent(this))
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
@@ -74,11 +74,7 @@ class MainActivity : AppCompatActivity(),
                     index: Int,
                     profile: Profile
                 ) {
-                    presenter?.let {
-                        showFilmsPopup(
-                            it.getFilmDisplayString(profile.filmIds)
-                        )
-                    }
+                    // TODO click item
                 }
             })
         layoutManager = LinearLayoutManager(this)
@@ -101,30 +97,12 @@ class MainActivity : AppCompatActivity(),
         checkLoadingProgressBar()
     }
 
-    override fun fetchedFilmListDone() {
-        isFetchedFilmList = true
-        checkLoadingProgressBar()
-    }
-
     override fun setPresenter(presenter: MainContract.Presenter) {
         this.presenter = presenter
     }
 
     private fun checkLoadingProgressBar() {
-        if (isFetchedProfileData && isFetchedFilmList) {
-            progressBar.visibility = View.GONE
-        }
-    }
-
-    private fun showFilmsPopup(films: String) {
-        val dialog: AlertDialog = AlertDialog.Builder(this)
-            .setMessage(films)
-            .create()
-        if (isFinishing) {
-            return
-        } else {
-            dialog.show()
-        }
+        progressBar.visibility = View.GONE
     }
 
     private fun shouldLoadMore() {

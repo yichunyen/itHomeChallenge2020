@@ -8,14 +8,14 @@ import yichunyen.swapi.demo.data.FilmResponse
 import yichunyen.swapi.demo.data.ProfileListResponse
 
 interface NetworkService {
-    @GET("/api/people/")
+    @GET("people")
     fun profileList(): Call<ProfileListResponse>
 
-    @GET("/api/people/")
+    @GET("people")
     fun profileList(
         @Query("page") page: Int
     ) : Call<ProfileListResponse>
 
-    @GET("/api/films/")
-    fun films(): Call<FilmResponse>
+//    @GET("/api/films/")
+//    fun films(): Call<FilmResponse>
 }
