@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkManager private constructor() {
     companion object {
-        private const val BASE_URL = "https://swapi.dev/"
+        private const val BASE_URL = "https://www.swapi.tech/api/"
         private var instance: NetworkManager? = null
         private var retrofit: Retrofit? = null
         val client: NetworkService
